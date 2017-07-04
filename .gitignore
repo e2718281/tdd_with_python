@@ -1,6 +1,6 @@
 #django
 .idea
-db.sqlite3
+database/db.sqlite3
 geckodriver.log
 __pycache__
 *.pyc
