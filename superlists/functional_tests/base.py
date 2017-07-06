@@ -10,9 +10,9 @@ MAX_WAIT = 10
 class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
-        staging_server = os.environ.get('DEV_SERVER')
-        if staging_server:
-            self.live_server_url = 'http://' + '127.0.0.1:8000'
+        #staging_server = os.environ.get('DEV_SERVER')
+        #if staging_server:
+        #    self.live_server_url = 'http://' + '127.0.0.1:8000'
 
     def tearDown(self):
         self.browser.quit()
@@ -29,3 +29,14 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.5)
+
+    def wait_for(self, fn):
+        start_time = time.time()
+        while True:
+            try:
+                return fn()
+            except (AssertionError, WebDriverException) as e:
+                if time.time() - start_time > MAX_WAIT:
+                    raise e
+                time.sleep(0.5)
+
