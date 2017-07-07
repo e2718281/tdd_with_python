@@ -36,8 +36,6 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
 
         response = self.client.get('/lists/{}/'.format(correct_list.id))
-        print("Items: " + str(response.context['list']))
-
         self.assertEqual(response.context['list'], correct_list)
 
     def test_can_save_a_POST_request_to_an_existing_list(self):
