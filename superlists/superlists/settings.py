@@ -33,12 +33,18 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'lists',
+    'accounts',
     #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+AUTH_USER_MODEL = 'accounts.ListUser'
+AUTHENTICATION_BACKENDS = [
+    'accounts.authentication.PasswordlessAuthenticationBackend',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'jimborod04@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('DEV_ACCT_PW')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
